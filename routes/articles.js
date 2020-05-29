@@ -29,6 +29,8 @@ router.get('/your', async (req, res) => {
     const user = await User.findById(req.session.userId)
     const articles = await Articles.find({
         username: user.username        
+    }).sort({
+        createdAt: "desc"
     })
     try{
         res.render('articles/your', {articles:articles})
@@ -48,6 +50,11 @@ router.get('/show/:id', async (req, res) => {
         console.error(err)
         res.redirect('/')
     }
+})
+
+router.delete('/:id', async (req, res) => {
+    await Articles.findByIdAndDelete(req.params.id)
+    res.redirect('/articles/your')
 })
 
 module.exports = router

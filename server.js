@@ -8,6 +8,12 @@ const expressSession = require('express-session')
 const connectMongo = require('connect-mongo')
 const auth = require('./middleware/auth')
 const redirectIfAuth = require('./middleware/redirectIfAuth')
+const connectFlash = require("connect-flash")
+const methodOverride = require('method-override')
+
+app.use(methodOverride('_method'))
+
+app.use(connectFlash())
 
 app.use(express.urlencoded({extended:true}))
 mongoose.connect(connectionString, ({

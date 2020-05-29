@@ -5,9 +5,12 @@ const bcrypt = require('bcrypt')
 const redirectIfAuth = require('../middleware/redirectIfAuth')
 const auth = require('../middleware/auth')
 const Articles = require('../models/articles')
+const connectFlash = require("connect-flash")
 
 router.get('/signup', redirectIfAuth, (req,res) => {
-    res.render('signup')
+    res.render('signup', {
+        error: req.flash('signUpError')
+    })
 })
 
 router.post('/login', redirectIfAuth,async (req,res) => {
@@ -20,12 +23,12 @@ router.post('/login', redirectIfAuth,async (req,res) => {
             res.redirect('/')
         }
         else{
+            req.flash("loginError", loginError)
             res.redirect('/user/login')
-            console.log("wrong password")
         }
     }
     catch(err){
-        console.log("No user found")
+        req.flash("loginError", loginError)
         res.redirect('/user/login')
     }
 })
@@ -41,13 +44,16 @@ router.post('/signup', redirectIfAuth,async (req,res) => {
         res.redirect('login')
     }
     catch(err){
+        const signUpError = "Username Already Exists"
+        req.flash("signUpError", signUpError)
         res.redirect("signup")
-        console.error(err)
     }
 })
 
 router.get('/login', redirectIfAuth, (req,res) => {
-    res.render("login")
+    res.render("login", {
+        error: req.flash("loginError")
+    })
 })
 
 router.get('/logout', (req, res) => {
