@@ -23,11 +23,13 @@ router.post('/login', redirectIfAuth,async (req,res) => {
             res.redirect('/')
         }
         else{
+            const loginError = "Wrong Password"
             req.flash("loginError", loginError)
             res.redirect('/user/login')
         }
     }
     catch(err){
+        const loginError = "No User found with this Username"
         req.flash("loginError", loginError)
         res.redirect('/user/login')
     }
