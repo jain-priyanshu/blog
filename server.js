@@ -36,4 +36,4 @@ app.get('/', redirectIfAuth, (req,res) => {
 app.use("/user", userRouter)
 app.use('/articles', auth, articleRouter)
 
-app.listen(3000)
+app.listen(process.env.PORT || 3000)
