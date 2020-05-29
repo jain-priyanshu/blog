@@ -2,7 +2,6 @@ const express = require("express")
 const app = express()
 const userRouter = require("./routes/user")
 const mongoose = require("mongoose")
-const connectionString = "mongodb+srv://dbAdmin:dbAdmin@luster0-5y5x2.mongodb.net/test?retryWrites=true&w=majority"
 const articleRouter = require('./routes/articles')
 const expressSession = require('express-session')
 const connectMongo = require('connect-mongo')
@@ -10,13 +9,14 @@ const auth = require('./middleware/auth')
 const redirectIfAuth = require('./middleware/redirectIfAuth')
 const connectFlash = require("connect-flash")
 const methodOverride = require('method-override')
+require('dotenv').config()
 
 app.use(methodOverride('_method'))
 
 app.use(connectFlash())
 
 app.use(express.urlencoded({extended:true}))
-mongoose.connect(connectionString, ({
+mongoose.connect(process.env.CONNECTION_STRING, ({
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
