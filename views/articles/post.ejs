@@ -1,0 +1,12 @@
+<%- include("../_layout_header") %>
+
+<div class="container ml-2 mt-4">
+    <h1 class="mb-1 ml-2"><%= article.title %></h1>
+    <div class="text-muted mb-2 ml-2">by <%= article.username %> on <%= article.createdAt.toLocaleDateString()%></div>
+    <div class="ml-2 mb-2">
+        <%= article.content %>
+    </div>
+    <a href="/" class="btn btn-secondary mt-2 ml-2">All Articles</a>
+</div>
+
+<%- include("../_layout_footer") %>
