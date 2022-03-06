@@ -20,7 +20,7 @@
                         <%= article.description %>
                     </div>
                     <a href="/articles/show/<%= article.id %>" class="btn btn-primary ml-2">Read</a>
-                    <a href="/articles/show/<%= article.id %>" class="btn btn-secondary ml-2">Edit</a>
+                    <!-- <a href="/articles/show/<%= article.id %>" class="btn btn-secondary ml-2">Edit</a> -->
                     <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline ml-2">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
